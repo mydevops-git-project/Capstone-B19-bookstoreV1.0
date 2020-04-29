@@ -17,8 +17,8 @@ node('Slave1'){
         def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package'
     }
     stage("copying required files"){
-        sh "chmod 777 /inet/workspace/jfrog-example/script.sh"
-        sh "/inet/workspace/jfrog-example/script.sh"
+        sh "chmod 777 /inet/workspace/Capstone1-project/script.sh"
+        sh "/inet/workspace/Capstone1-project/script.sh"
         sh "scp -o StrictHostKeyChecking=no *.war root@docker-master:/inet/projects"
         sh "scp -o StrictHostKeyChecking=no Dockerfile root@docker-master:/inet/projects"
         sh "scp -o StrictHostKeyChecking=no kubernetes-deployment.yml root@k8smaster:/inet/projects"
