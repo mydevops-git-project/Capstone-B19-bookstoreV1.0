@@ -13,6 +13,8 @@ node('Slave1'){
         def rtMaven = Artifactory.newMavenBuild()
         rtMaven.resolver server: server, releaseRepo: 'libs-release', snapshotRepo: 'libs-snapshot'
         rtMaven.deployer server: server, releaseRepo: 'libs-release-local', snapshotRepo: 'libs-snapshot-local'
+        def downloadSpec = readFile 'exclude-download.json'
+        def buildInfo2 = server.download spec: downloadSpec
         rtMaven.tool = 'Maven2'
         def buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean package'
     }
