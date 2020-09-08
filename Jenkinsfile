@@ -42,6 +42,6 @@ node('slave1') {
     }
   }
   stage("service restart") {
-    sh "ansible-playbook dockermaster -i /etc/ansible $WORKSPACE/ansible_playbook.yml"
+    sh "ansible dockermaster -m shell -a 'docker service create --name capstoneservice2 --replicas 2 -p 22021:8080 bookstoreimg:v1' -u root"
   }
 }
