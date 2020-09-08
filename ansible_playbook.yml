@@ -1,0 +1,24 @@
+---
+- hosts: dockermaster
+  tasks:
+  - name: Copying war file
+    copy:
+      src: /DevOps/ansible/ILP_Bookstore.war
+      dest: /DevOps/ansible/
+  - name: Copying dockerfile. 
+    copy:
+      src: /DevOps/workspace/samplejob/Dockerfile
+      dest: /DevOps/ansible/
+  - name: Remove Image
+    docker_image:
+      state: absent
+      name: bookstoreimg
+      tag: v1
+      force: yes
+  - name: creating docker image
+    docker_image:
+      path: /DevOps/ansible/
+      name: bookstoreimg
+      tag: v1
+      pull: no
+      state: build
