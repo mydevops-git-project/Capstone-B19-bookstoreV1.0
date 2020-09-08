@@ -26,8 +26,8 @@ node('slave1') {
     goals: 'clean install'
     def downloadSpec = readFile 'exclude-download.json'
     def buildInfo2 = server.download spec: downloadSpec
-    sh "chmod 777 /DevOps/workspace/samplejob/script.sh"
-    sh "/DevOps/workspace/samplejob/script.sh"
+    sh "chmod 777 /DevOps/workspace/$WORKSPACE/script.sh"
+    sh "/DevOps/workspace/$WORKSPACE/script.sh"
   }
   stage("executing ansible_playbook") {
     sh "ansible-playbook -i /etc/ansible $WORKSPACE/ansible_playbook.yml"
@@ -35,9 +35,9 @@ node('slave1') {
   stage("exception handling") {
     script {
       try {
-        sh "docker service rm capstoneservice2"
+        sh "ssh root@10.128.0.4 docker service rm capstoneservice2"
       } catch(error) {
-        sh "docker service create --name capstoneservice2 --replicas 2 -p 22021:8080 bookstoreimg:v1"
+        sh "ssh root@10.128.0.4 docker service create --name capstoneservice2 --replicas 2 -p 22021:8080 bookstoreimg:v1"
       }
     }
   }
