@@ -12,12 +12,7 @@ node('slave1') {
       sh "${mavenhome}/bin/mvn sonar:sonar"
     }
   }
-  stage('Maven Build') {
-    withMaven(jdk: 'java', maven: 'Maven') {
-      sh 'mvn clean install'
-    }
-  }
-  stage("artifactory configuration") {
+    stage("artifactory configuration") {
     def server = Artifactory.server 'Jfrog'
     def rtMaven = Artifactory.newMavenBuild()
     rtMaven.resolver server: server,
