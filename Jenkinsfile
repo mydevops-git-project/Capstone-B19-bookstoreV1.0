@@ -35,7 +35,7 @@ node('slave1') {
     sh "/DevOps/workspace/samplejob/script.sh"
   }
   stage("executing ansible_playbook") {
-    sh "ansible-playbook -i /etc/ansible $WORKSPACE/ansible_playbook.yaml"
+    sh "ansible-playbook -i /etc/ansible $WORKSPACE/ansible_playbook.yml"
   }
   stage("exception handling") {
     script {
