@@ -47,6 +47,6 @@ node('slave1') {
     }
   }
   stage("service restart") {
-    sh "ansible-playbook -i /etc/ansible $WORKSPACE/ansible_playbook.yml"
+    sh "ansible-playbook dockermaster -i /etc/ansible $WORKSPACE/ansible_playbook.yml"
   }
 }
