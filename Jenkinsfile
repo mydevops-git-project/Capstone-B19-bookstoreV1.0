@@ -32,16 +32,4 @@ node('slave1') {
   stage("executing ansible_playbook") {
     sh "ansible-playbook -i /etc/ansible $WORKSPACE/ansible_playbook.yml"
   }
-  stage("exception handling") {
-    script {
-      try {
-        sh "ssh root@10.128.0.4 docker service rm capstoneservice2"
-      } catch(error) {
-        sh "ssh root@10.128.0.4 docker service create --name capstoneservice2 --replicas 2 -p 22021:8080 bookstoreimg:v1"
-      }
-    }
-  }
-  stage("service restart") {
-    sh "ansible dockermaster -m shell -a 'docker service create --name capstoneservice2 --replicas 2 -p 22021:8080 bookstoreimg:v1' -u root"
-  }
-}
+ }
