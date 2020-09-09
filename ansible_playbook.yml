@@ -2,13 +2,13 @@
 - hosts: dockermaster
   gather_facts: no
   tasks:
-  - name: Copying war file
+  - name: Copying war file from jenkins slave(sonar-scanner) to docker(master)
     copy:
       src: /DevOps/ansible/ILP_Bookstore.war
       dest: /DevOps/ansible/
   - name: Copying dockerfile. 
     copy:
-      src: $WORKSPACE/Dockerfile
+      src: /DevOps/workspace/DevOpsCapstone
       dest: /DevOps/ansible/
   - name: Remove Image
     docker_image:
