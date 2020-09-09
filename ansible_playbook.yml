@@ -1,5 +1,6 @@
 ---
 - hosts: dockermaster
+  gather_facts: no
   tasks:
   - name: Copying war file
     copy:
@@ -7,7 +8,7 @@
       dest: /DevOps/ansible/
   - name: Copying dockerfile. 
     copy:
-      src: /DevOps/workspace/samplejob/Dockerfile
+      src: $WORKSPACE/Dockerfile
       dest: /DevOps/ansible/
   - name: Remove Image
     docker_image:
@@ -22,3 +23,8 @@
       tag: v1
       pull: no
       state: build
+  - name: deleting existing service
+    shell: "docker service rm capstoneservice2"
+    ignore_errors: True
+  - name: creating docker service
+    shell: "docker service create --name capstoneservice2 --replicas 2 -p 22021:8080 bookstoreimg:v1"
