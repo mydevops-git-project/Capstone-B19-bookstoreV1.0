@@ -5,7 +5,7 @@
   <artifactId>ILP</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
-  <name>ILP1UserMgmt Maven Webapp</name>
+  <name>DevOps_Capstone_V1.0</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>

@@ -8,7 +8,6 @@ node('slave1') {
     def mavenhome = tool name: 'Maven',
     type: 'maven';
     withSonarQubeEnv(credentialsId: 'sonartoken') {
-      // sh "${scannerHome}/bin/sonar-scanner"
       sh "${mavenhome}/bin/mvn sonar:sonar"
     }
   }
